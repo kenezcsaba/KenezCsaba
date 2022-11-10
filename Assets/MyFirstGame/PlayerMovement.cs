@@ -5,10 +5,11 @@ class PlayerMovement : MonoBehaviour
 
     // [SerializeField] Vector3 velocity;              // mozgas
     [SerializeField] float speed;
+    [SerializeField] float angularSpeed = 180;
 
     private void OnValidate()
     {
-        speed = 4;
+        speed = 30;
     }
 
     //  [SerializeField] KeyCode rightButton;          +                  bool isRightPressed = Input.GetKey(rightButton) || Input.GetKey(KeyCode.D);
@@ -50,7 +51,12 @@ class PlayerMovement : MonoBehaviour
 
         if (direction != Vector3.zero)
         {
-            transform.rotation = Quaternion.LookRotation(direction);
+            Quaternion targetRotation = Quaternion.LookRotation(direction);
+            Quaternion currentRotation = transform.rotation;
+
+            float maxStepInAngle = angularSpeed * Time.deltaTime;
+
+            transform.rotation = Quaternion.RotateTowards(currentRotation, targetRotation, maxStepInAngle);
         }
         
     }
