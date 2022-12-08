@@ -34,7 +34,7 @@ class ClickExplosion : MonoBehaviour
             Debug.Log("exp: " + hitInfo.point);
 
 
-            Rigidbody[] rbs = FindObjectsOfType<Rigidbody>();                      // megkeres valamit amibõl egy vann
+            Rigidbody[] rbs = FindObjectsOfType<Rigidbody>();                      // megkeres valamit amibõl egy van -  Object - Objects mindent
 
             for (int i = 0; i < rbs.Length; i++)
             {
