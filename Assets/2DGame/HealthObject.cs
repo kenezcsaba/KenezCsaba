@@ -6,6 +6,9 @@ class HealthObject : MonoBehaviour
 {
     [SerializeField] TMP_Text textComponent;
     [SerializeField] int maxHealth = 100;
+
+    [SerializeField] GameObject objectToTurnOnWhenDie;      //amikor kipurcan akkor ez lép majd érvénybe - game over
+
     [SerializeField] Color maxHealthColor;
     [SerializeField] Color zeroHealthColor;
 
@@ -32,6 +35,7 @@ class HealthObject : MonoBehaviour
     {
         currentHealth = 0;
         UpdateText();
+        TestDeath();
     }
 
     public bool IsDead()
@@ -45,5 +49,21 @@ class HealthObject : MonoBehaviour
         currentHealth -= damage;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
         UpdateText();
+        TestDeath();
     }
+
+
+    // külön metódus when die
+
+    void TestDeath()
+    {
+        if (IsDead())
+        {
+            objectToTurnOnWhenDie.SetActive(true);
+            // objectToTurnOnWhenDie?.SetActive(true);     ha objectToTurnOnWhenDie értéke nulla vagyis nincs bekötve semmi, akkor nincs teendõje, ha van valami akkor pedig a setactive valósul meg. ez hiba kiküszöbölés
+        }
+    }
+
+
+
 }
