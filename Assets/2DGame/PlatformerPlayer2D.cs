@@ -69,8 +69,29 @@ class PlatformerPlayer2D : MonoBehaviour
 
         // Movement
 
-        float inputX = Input.GetAxis("Horizontal");
+        float inputX = Input.GetAxis("Horizontal");                                         // inputx ha valamelyik irányba megyünk
 
+
+        /*
+        if (inputX != 0)              //ha nem megyünk se jobbra se balra                    // ezt csináljuk a killövéshez
+        {
+            float direction = Mathf.Sign(inputX);       //csak  -1 vagy 1 lehet ennek az értéke 
+            Vector3 scale = transform.localScale;                                                                   // itt azt csináljuk h a karakter orra arra nézzen amerre mentünk
+            transform.localScale = new Vector3(direction * Mathf.Abs(scale.x), scale.y,scale.z);                    // a transformban a scale értéket kell ugye -1-szeresére állítani ha fordulást akarunk elérni
+       
+                    nem vált be, mert ezzel együtt maradt a player lokális jobbrája fixen egy irányban, a lövést pedig ehhez kötöttük, így nem vált be
+        
+        }*/
+
+        if (inputX > 0)
+        {
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
+
+        else if (inputX < 0)
+        {
+            transform.rotation = Quaternion.Euler(0, 180, 0);                               // elforgatjuk a playert
+        }
 
         Vector2 velocity = new Vector2(inputX * horizontalSpeed, rigidbody.velocity.y);
         rigidbody.velocity = velocity;
