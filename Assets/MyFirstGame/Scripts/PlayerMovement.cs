@@ -6,11 +6,22 @@ class PlayerMovement : MonoBehaviour
     // [SerializeField] Vector3 velocity;              // mozgas
     [SerializeField] float speed;
     [SerializeField] float angularSpeed = 180;
+    [SerializeField] Animator anim;                                     // dec 22.
 
-    private void OnValidate()
+
+    void OnValidate()
+    {
+        if (anim == null)
+        {
+            anim = GetComponentInChildren<Animator>();
+        }
+    
+    }
+
+   /* private void OnValidate()
     {
         speed = 30;
-    }
+    }*/                     // dec 22. tettem kommentbe
 
     //  [SerializeField] KeyCode rightButton;          +                  bool isRightPressed = Input.GetKey(rightButton) || Input.GetKey(KeyCode.D);
 
@@ -44,6 +55,10 @@ class PlayerMovement : MonoBehaviour
 
         Vector3 velocity = direction * speed;
 
+        bool isMoving = velocity != Vector3.zero;                           // dec 22.          a kód információt ad át az animator-nak
+        anim.SetBool("isRunning",isMoving);                                 // dec 22.
+                                                                                // Trigger ha megtörténik akkor átmegyünk egyik állapotból egy másikba az animációban
+                                                                                        // ha animációba metódushívást beleteszünk akkor az úgy tud hatást létrehozni a játékban, pl egy ütõmozdulatba a sebzés tényleges mozdulatához teszek egy ilyet, ami majd csökkenti az életet
 
 
         transform.position += velocity * Time.deltaTime;
@@ -60,5 +75,9 @@ class PlayerMovement : MonoBehaviour
         }
         
     }
+
+    // int nagyobb ja 64 bites változat: long
+    // float 64 bit: double
+    // rigidbody.velocity gravitáció szimulálása
 
 }
