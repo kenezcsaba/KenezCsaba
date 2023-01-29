@@ -1,7 +1,7 @@
 using UnityEngine;
 
 enum ShootingPattern { First, Sequence, Random, PingPong };                                                    // nagyon egyszerû dolog : ))))))
-    //lövési minta      értékek: lehet h mindig az elsõt, sorban,random...
+    //lövési minta típus     értékek: lehet h mindig az elsõt, sorban,random...
 
 class Shooter : MonoBehaviour
 {

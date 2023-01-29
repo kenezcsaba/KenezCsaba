@@ -13,7 +13,7 @@ class SpaceShip : MonoBehaviour
 
     Vector3 velocity;   // nem akarjuk h update-kben elvesszen
 
-    void FixUpdate()
+    void FixedUpdate()
     {
         bool forward = Input.GetKey(forwardButton) || Input.GetKey(KeyCode.W);
 

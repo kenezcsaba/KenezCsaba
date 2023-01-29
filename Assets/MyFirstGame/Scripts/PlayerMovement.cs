@@ -45,7 +45,7 @@ class PlayerMovement : MonoBehaviour
             x -= 1;
         }
 
-        float z = isUpPressed ? 1 :
+        float z = isUpPressed ? (isDownPressed ? 0 : 1) :
             (isDownPressed ? -1 : 0);
 
 

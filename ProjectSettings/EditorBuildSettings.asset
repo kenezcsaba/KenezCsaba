@@ -8,4 +8,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/2DGame/2DGame.unity
     guid: ad3d16083952d3449986cc2eb0447814
+  - enabled: 1
+    path: Assets/Unblock/LevelOne/LevelOne.unity
+    guid: ea805c106eff78e4cbc2ca851de35143
+  - enabled: 1
+    path: Assets/Unblock/LevelTwo/LevelTwo.unity
+    guid: 39f6d4deedbe1c249978a7d838491beb
   m_configObjects: {}

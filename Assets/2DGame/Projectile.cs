@@ -20,7 +20,7 @@ class Projectile : MonoBehaviour
     {                                                           // speciális dolgok ezek az Ienumerator, nem egyszer tér vissza hanem sokszor
         yield return new WaitForSeconds(lifeTime);              // a Unity nem akad meg, de ezen a komponensen megáll, vár egy darabig aztán fut tovább
 
-        yield return null;      // ha a következõ frame-ig akarunk várni. várakozás egy frame-ig.
+        yield return null;      // ha a következõ frame-ig akarunk várni. várakozás egy frame-ig. itt nem is feltétlen szükséges
         Destroy(gameObject);                                                                // például egy super mario féle sebzõdés amikor vibrál a
                                                                                             // karakter akkor egy olyat coroutne-ban meg lehet csinálni
 
@@ -29,8 +29,9 @@ class Projectile : MonoBehaviour
 
     public void SetVelocity(Vector2 velocity)
     {
-        this.velocity = velocity;                //adott lokális változóra hivatkozna, kivéve ha this.-ot használunk
+        this.velocity = velocity;                //adott lokális változóra hivatkozna, kivéve ha this.-ot használunk, de így az osztályváltozóra hivatkozunk
     }
+
 
     void Update()
     {

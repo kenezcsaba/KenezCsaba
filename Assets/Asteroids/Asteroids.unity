@@ -252,7 +252,7 @@ MonoBehaviour:
   maxSpeed: 5
   acceleration: 10.09
   forwardButton: 273
-  angularSpeed: 180
+  angularSpeed: 90
   drag: 0.3
 --- !u!136 &157863895
 CapsuleCollider:

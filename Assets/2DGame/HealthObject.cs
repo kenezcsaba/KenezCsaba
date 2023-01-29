@@ -17,13 +17,13 @@ class HealthObject : MonoBehaviour
 
     const string healthKey = "health";                                // konstans változók értéke nem változik -- konstans 
 
-    private void Awake()                // elõbb fut le mint a start                //HealthSave01  -- a végén áttettük startba, mivel ott megadtuk h max health-tel kezdjünk
+    /*private void Awake()                // elõbb fut le mint a start                //HealthSave01  -- a végén áttettük startba, mivel ott megadtuk h max health-tel kezdjünk
     {
         if (PlayerPrefs.HasKey(healthKey))
         {
             currentHealth = PlayerPrefs.GetInt(healthKey);
         }
-    }
+    }*/
 
     private void OnDestroy()        //     HealthSave 01          ahhoz h egy elmentett élet szintet majd egy újboli kezdésnél betölthetõ legyen
     {
