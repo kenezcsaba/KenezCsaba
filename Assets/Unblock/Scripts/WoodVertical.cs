@@ -1,11 +1,12 @@
 using UnityEngine;
 
-class L2WoodNine : MonoBehaviour
+class WoodVertical : MonoBehaviour
 {
     [SerializeField] SpriteRenderer highlight;
     [SerializeField] bool isHit;
-    float scaleX;
-    float hittingX;
+    [SerializeField] float positionX;
+    float scaleY;
+    float hittingY;
 
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -16,8 +17,8 @@ class L2WoodNine : MonoBehaviour
             isHit = true;
             Vector2 hittingPos = collision.transform.position;
             Vector3 hittingScale = collision.transform.localScale;
-            scaleX = hittingScale.x;
-            hittingX = hittingPos.x;
+            scaleY = hittingScale.y;
+            hittingY = hittingPos.y;
         }
     }
 
@@ -65,26 +66,26 @@ class L2WoodNine : MonoBehaviour
 
             Vector2 offsetVec = mousePos - mouseStartPos;
             Vector2 newPos = selfStartPos + offsetVec;
-            float limitX, limitXMax;
-            newPos.y = 7.5f;
+            float limitY, limitYMax;
+            newPos.x = positionX;
             if (isHit)
             {
-                if (newPos.x > hittingX)
+                if (newPos.y > hittingY)
                 {
                     Vector3 selfScale = transform.localScale;
-                    float selfScaleX = selfScale.x;
-                    limitX = hittingX + scaleX / 2 + selfScaleX / 2;
-                    newPos.x = Mathf.Clamp(newPos.x, limitX, 10);
+                    float selfScaleY = selfScale.y;
+                    limitY = hittingY + scaleY / 2 + selfScaleY / 2;
+                    newPos.y = Mathf.Clamp(newPos.y, limitY, 10);
                     transform.position = new Vector2(newPos.x, newPos.y);
 
                 }
 
-                if (newPos.x < hittingX)
+                if (newPos.y < hittingY)
                 {
                     Vector3 selfScaleMax = transform.localScale;
-                    float selfScaleXMax = selfScaleMax.x;
-                    limitXMax = hittingX - scaleX / 2 - selfScaleXMax / 2;
-                    newPos.x = Mathf.Clamp(newPos.x, -10, limitXMax);
+                    float selfScaleYMax = selfScaleMax.y;
+                    limitYMax = hittingY - scaleY / 2 - selfScaleYMax / 2;
+                    newPos.y = Mathf.Clamp(newPos.y, -10, limitYMax);
                     transform.position = new Vector2(newPos.x, newPos.y);
                 }
             }

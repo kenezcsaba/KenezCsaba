@@ -1,23 +1,24 @@
 using UnityEngine;
 
-class WoodSix : MonoBehaviour
+class WoodHorizontal : MonoBehaviour
 {
     [SerializeField] SpriteRenderer highlight;
     [SerializeField] bool isHit;
-    float scaleY;
-    float hittingY;
+    [SerializeField] float positionY;
+    float scaleX;
+    float hittingX;
 
 
     void OnTriggerEnter2D(Collider2D collision)
     {
         Hit collider = collision.gameObject.GetComponent<Hit>();
-        if (collider != null)
+        if (collider!=null)
         {
             isHit = true;
             Vector2 hittingPos = collision.transform.position;
             Vector3 hittingScale = collision.transform.localScale;
-            scaleY = hittingScale.y;
-            hittingY = hittingPos.y;
+            scaleX = hittingScale.x;
+            hittingX = hittingPos.x; 
         }
     }
 
@@ -28,7 +29,7 @@ class WoodSix : MonoBehaviour
 
     void OnMouseEnter()
     {
-        if (highlight != null)
+        if (highlight!=null)
         {
             highlight.enabled = true;
         }
@@ -55,36 +56,36 @@ class WoodSix : MonoBehaviour
     void OnMouseDrag()
     {
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        float selfXmin = transform.position.x - transform.localScale.x / 2;
-        float selfXmax = transform.position.x + transform.localScale.x / 2;
-        float selfYmin = transform.position.y - transform.localScale.y / 2;
-        float selfYmax = transform.position.y + transform.localScale.y / 2;
+        float selfXmin = transform.position.x - transform.localScale.x/2;
+        float selfXmax = transform.position.x + transform.localScale.x/2;
+        float selfYmin = transform.position.y - transform.localScale.y/2;
+        float selfYmax = transform.position.y + transform.localScale.y/2;
 
         if (selfXmin <= mousePos.x && mousePos.x <= selfXmax && selfYmin <= mousePos.y && mousePos.y <= selfYmax)
         {
 
             Vector2 offsetVec = mousePos - mouseStartPos;
             Vector2 newPos = selfStartPos + offsetVec;
-            float limitY, limitYMax;
-            newPos.x = 2.5f;
+            float limitX,limitXMax;
+            newPos.y = positionY;
             if (isHit)
             {
-                if (newPos.y > hittingY)
+                if (newPos.x > hittingX)
                 {
                     Vector3 selfScale = transform.localScale;
-                    float selfScaleY = selfScale.y;
-                    limitY = hittingY + scaleY / 2 + selfScaleY / 2;
-                    newPos.y = Mathf.Clamp(newPos.y, limitY, 10);
+                    float selfScaleX = selfScale.x;
+                    limitX = hittingX + scaleX / 2 + selfScaleX / 2;
+                    newPos.x = Mathf.Clamp(newPos.x, limitX, 10);
                     transform.position = new Vector2(newPos.x, newPos.y);
 
                 }
 
-                if (newPos.y < hittingY)
+                if (newPos.x < hittingX)
                 {
                     Vector3 selfScaleMax = transform.localScale;
-                    float selfScaleYMax = selfScaleMax.y;
-                    limitYMax = hittingY - scaleY / 2 - selfScaleYMax / 2;
-                    newPos.y = Mathf.Clamp(newPos.y, -10, limitYMax);
+                    float selfScaleXMax = selfScaleMax.x;
+                    limitXMax = hittingX - scaleX / 2 - selfScaleXMax / 2;
+                    newPos.x = Mathf.Clamp(newPos.x, -10, limitXMax);
                     transform.position = new Vector2(newPos.x, newPos.y);
                 }
             }
